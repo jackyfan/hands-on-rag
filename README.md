@@ -10,6 +10,7 @@ conda activate hands-on-rag
 pip install chromadb
 ```
  测试Chroma
+
  2.1 嵌入式的使用方式
 ```python
 import chromadb 
