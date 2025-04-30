@@ -34,3 +34,8 @@ chroma_client = chromadb.HttpClient(host='localhost', port=8000)
 chroma_client.heartbeat() 
 ```
 
+3. 安装LlamaIndex
+```bash
+pip install llama-index
+```
+
