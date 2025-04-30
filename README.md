@@ -9,14 +9,14 @@ conda activate hands-on-rag
 ```bash
 pip install chromadb
 ```
-    测试Chroma
-    2.1 嵌入式的使用方式
+ 测试Chroma
+ 2.1 嵌入式的使用方式
 ```python
 import chromadb 
 client = chromadb.PersistentClient(path="./chroma_db") 
 client.heartbeat()
 ```
-    2.2 启动C/S模式
+ 2.2 启动C/S模式
 ```bash
 chroma run --path ./chroma_db 
 ```
