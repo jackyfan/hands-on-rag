@@ -38,4 +38,23 @@ chroma_client.heartbeat()
 ```bash
 pip install llama-index
 ```
+安装ollama模型库
+```bash
+pip install llama-index-llms-ollama 
+```
+安装ollama嵌入模型库
+```bash
+pip install llama-index-embeddings-ollama
+```
 
+4. 下载安装Ollama
+下载地址：https://ollama.com/download
+5. 部署大模型
+```bash
+ollama run qwen3:0.6b
+```
+部署嵌入模型
+```bash
+ollama pull milkey/dmeta-embedding-zh:f16
+ollama serve
+```
