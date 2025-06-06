@@ -203,3 +203,6 @@ node_modules
 
 #chroma
 chroma_db
+
+backend/app/saved_index
+backend/app/stored_documents.pkl

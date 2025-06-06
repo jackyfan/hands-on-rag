@@ -11,10 +11,10 @@ from llama_index.llms.openai import OpenAI
 from llama_index.llms.ollama import Ollama
 
 # 配置模型
-llm_ollama = Ollama(model="qwen3")
-embedding_model_openai = OpenAIEmbedding(model_name="dmeta-embedding-zh", embed_batch_size=50)
+llm_ollama = Ollama(model="qwen3:0.6b")
+embedding_model = OllamaEmbedding(model_name="shaw/dmeta-embedding-zh")
 Settings.llm = llm_ollama
-Settings.embed_model = embedding_model_openai
+Settings.embed_model = embedding_model
 # 全局共享索引
 index = None
 # 存储上传的文档信息
@@ -91,9 +91,20 @@ def get_document_list():
     return document_list
 
 
-if __name__== "__main__":
+if __name__ == "__main__":
     print("initializing index...")
     init_index()
 
     print(f'Create server on {SERVER_PORT}...')
-    namager = BaseManager({'',SERVER_PORT},b'password')
+    # 构造多线程的管理器对象，设置监听端口和密码
+    manager = BaseManager(('127.0.0.1', SERVER_PORT), b'password')
+    # 注册函数
+    print("Registering function...")
+    manager.register('query_index', query_index)
+    manager.register('insert_index', insert_index)
+    manager.register('get_document_list', get_document_list)
+    server = manager.get_server()
+    # 启动服务
+    print("Server started...")
+    # 监听调用请求，产生一个新的处理线程
+    server.serve_forever()
