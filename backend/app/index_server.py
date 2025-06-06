@@ -25,6 +25,7 @@ lock = Lock()
 # 索引持久化存储的位置
 index_name = "./saved_index"
 pkl_name = "stored_documents.pkl"
+collection_name = "company_collection"
 # 索引服务端口
 SERVER_PORT = 5602
 
@@ -34,7 +35,7 @@ SERVER_PORT = 5602
 def init_index():
     global index, stored_docs
     chroma = chromadb.HttpClient(host="localhost", port=8000)
-    collection = chroma.get_or_create_collection(name="chat_docs_collection")
+    collection = chroma.get_or_create_collection(name=collection_name)
     vector_store = ChromaVectorStore(chroma_collection=collection)
     # 互斥访问
     with lock:

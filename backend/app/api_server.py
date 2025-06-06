@@ -58,17 +58,12 @@ async def upload_file(request: Request, file: UploadFile = File(...), filename_a
     global manager
     try:
         contents = await file.read()
-        print("filename_as_doc_id：{}".format(str(filename_as_doc_id)))
         filepath = os.path.join('documents', file.filename)
-        print("文件路径：{}".format(filepath))
         with open(filepath, "wb") as f:
-            print("临时保存文件")
             f.write(contents)
         if filename_as_doc_id:
-            print("新增索引：{}".format(file.filename))
             manager.insert_index(filepath, doc_id=file.filename)
         else:
-            print("新增索引：{}".format(filepath))
             manager.insert_index(filepath)
     except Exception as e:
         if os.path.exists(filepath):
